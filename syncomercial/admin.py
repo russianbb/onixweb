@@ -2,7 +2,7 @@ from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin 
 from nested_admin import NestedStackedInline, NestedModelAdmin, NestedTabularInline
 
-from .models import Distribuidor, Filial, Responsavel, Responsavel_Distribuidor, RTV, RTV_Distribuidor
+from .models import Distribuidor, Filial, Responsavel, Responsavel_Filial, Responsavel_Distribuidor, RTV, RTV_Distribuidor
 
 
 class RTVAdmin(SimpleHistoryAdmin):
