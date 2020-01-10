@@ -106,6 +106,7 @@ class DistribuidorAdmin(SimpleHistoryAdmin, NestedModelAdmin):
 admin.site.register(Distribuidor, DistribuidorAdmin)
 admin.site.register(Filial, FilialAdmin)
 admin.site.register(Responsavel, ResponsavelAdmin)
+admin.site.register(Responsavel_Filial, Responsavel_FilialAdmin)
 admin.site.register(Responsavel_Distribuidor, Responsavel_DistribuidorAdmin)
 admin.site.register(RTV, RTVAdmin)
 admin.site.register(RTV_Distribuidor, RTV_DistribuidorAdmin)
