@@ -113,46 +113,39 @@ class Responsavel_Distribuidor(models.Model):
         verbose_name = 'Responsável pelo Distribuidor'
         verbose_name_plural = '9.2 - Responsável pelo Distribuidor'
 
-# Esse modelo esta temporariamente desativado.
-# Provavelmente irei incluir esses dados no cadastro da filial @todo
-# class Responsavel_Filial(models.Model):
-#     filial_id = models.ForeignKey(Filial, on_delete=models.CASCADE)
-#     responsavel_id = models.ForeignKey(Responsavel, on_delete=models.CASCADE)
-#     criado_em = models.DateTimeField(auto_now_add=True)
-#     atualizado_em = models.DateTimeField(auto_now=True)
-#     status = models.BooleanField(default=True)
-#     historico = HistoricalRecords()
-
-#     def __str__(self):
-#         return f"{self.filial_id.distribuidor_id.razao_social} - {self.responsavel_id.nome}"
-
-#     def distribuidor(self):
-#         return self.filial_id.distribuidor_id.razao_social
-
-#     def local(self):
-#         return f"{self.filial_id.cidade} / {self.filial_id.estado}"
+class Responsavel_Filial(models.Model):
+    filial_id = models.ForeignKey(Filial, on_delete=models.CASCADE)
+    responsavel_id = models.ForeignKey(Responsavel, on_delete=models.CASCADE)
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=True)
+    historico = HistoricalRecords()
+    def __str__(self):
+        return f"{self.filial_id.distribuidor_id.razao_social} - {self.responsavel_id.nome}"
+    def distribuidor(self):
+        return self.filial_id.distribuidor_id.razao_social
+    def local(self):
+        return f"{self.filial_id.cidade} / {self.filial_id.estado}"
     
-#     def unidade(self):
-#         return f"{self.filial_id.slug} - {self.filial_id.codigo_local}"
+    def unidade(self):
+        return f"{self.filial_id.slug} - {self.filial_id.codigo_local}"
+    def responsavel(self):
+        return self.responsavel_id.nome
+    def atuacao(self):
+        return self.responsavel_id.tipo_atuacao
 
-#     def responsavel(self):
-#         return self.responsavel_id.nome
+    def telefone1(self):
+        return f'({self.responsavel_id.ddd1}) {self.responsavel_id.telefone1[-9:-4]}-{self.responsavel_id.telefone1[-4:]}'
 
-#     def atuacao(self):
-#         return self.responsavel_id.tipo_atuacao
+    def telefone2(self):
+        if self.responsavel_id.ddd2 and self.responsavel_id.telefone2:
+            return f'({self.responsavel_id.ddd2}) {self.responsavel_id.telefone2[-9:-4]}-{self.responsavel_id.telefone2[-4:]}'
 
-#     def telefone1(self):
-#         return f'({self.responsavel_id.ddd1}) {self.responsavel_id.telefone1[-9:-4]}-{self.responsavel_id.telefone1[-4:]}'
-
-#     def telefone2(self):
-#         if self.responsavel_id.ddd2 and self.responsavel_id.telefone2:
-#             return f'({self.responsavel_id.ddd2}) {self.responsavel_id.telefone2[-9:-4]}-{self.responsavel_id.telefone2[-4:]}'
-
-#     class Meta:
-#         ordering = ['filial_id', 'responsavel_id']
-#         unique_together = ('filial_id', 'responsavel_id')
-#         verbose_name = 'Responsável pela Filial'
-#         verbose_name_plural = '9.3 - Responsável pela Filial'
+    class Meta:
+        ordering = ['filial_id', 'responsavel_id']
+        unique_together = ('filial_id', 'responsavel_id')
+        verbose_name = 'Responsável pela Filial'
+        verbose_name_plural = '9.3 - Responsável pela Filial'
 
 
 class RTV(models.Model):
