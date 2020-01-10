@@ -69,13 +69,14 @@ class Responsavel_DistribuidorAdmin(SimpleHistoryAdmin):
 #     search_fields = ['filial_id__distribuidor_id__razao_social', 'responsavel_id__nome', 'responsavel_id__tipo_atuacao', 'responsavel_id__telefone1', 'responsavel_id__telefone2']
 
 
-# Esse modelo esta temporariamente desativado.
-# Provavelmente irei incluir esses dados no cadastro da filial @todo
-# class FilialNestedInLine(NestedStackedInline):
-#     #Classe que controle exclusivamente a exibição da filial na página do distribuidor
-#     model = Filial
-#     extra = 0
-#     inlines = [Responsavel_FilialNestedInLine]
+class FilialNestedInLine(NestedStackedInline):
+    #Classe que controle exclusivamente a exibição da filial na página do distribuidor
+    model = Filial
+    extra = 0
+    
+    # Esse modelo esta temporariamente desativado.
+    # Provavelmente irei incluir esses dados no cadastro da filial @todo
+    # inlines = [Responsavel_FilialNestedInLine]
 
 class FilialAdmin(SimpleHistoryAdmin, NestedModelAdmin):
     #Classe que controla a exibição do model "Filial" em sua página EXCLUSIVA do admin
