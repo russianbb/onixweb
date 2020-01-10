@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_9&o9o+p4yim8a@*v#w$e(gzv$qh=&sq2rh%2sttcj8(d(w_&n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '192.34.63.130', 'onixse.com', 'web.onixse.com']
 
