@@ -21,15 +21,20 @@ class Distribuidor(models.Model):
         verbose_name_plural = '2.0 - Cadastro de Distribuidores'
 
 
+
 class Filial(models.Model):
-    distribuidor_id = models.ForeignKey(Distribuidor, on_delete=models.CASCADE)
-    codigo_local = models.CharField(max_length = 100, null=True, blank=True)
-    slug = models.SlugField(null=True, blank=True)
+    codigo = models.CharField(max_length = 15, null=True, blank=True)
+    distribuidor = models.ForeignKey('Distribuidor', on_delete=models.CASCADE, null=True)
+    nome = models.CharField(max_length = 50, null=True, blank=True)
     cnpj = models.CharField(max_length = 14)
+    responsavel = models.CharField(max_length=50, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    ddd = models.CharField(max_length = 2, null=True, blank=True)
+    telefone = models.CharField(max_length = 9, null=True, blank=True)
     endereco = models.CharField(max_length = 200)
     cidade = models.CharField(max_length = 50)
     estado = models.CharField(max_length = 2)
-    cod_ibge = models.CharField(max_length = 9, null=True, blank=True)
+    codibge = models.CharField(max_length = 9, null=True, blank=True)
     latitude = models.IntegerField(null=True, blank=True)
     longitude = models.IntegerField(null=True, blank=True)
     controla_estoque = models.BooleanField(default=True)
@@ -39,22 +44,25 @@ class Filial(models.Model):
     historico = HistoricalRecords()
    
     def __str__(self):
-        return f"{self.distribuidor_id.razao_social} - {self.slug}"
+        if nome_local:
+            return f"{self.distribuidor_id.razao_social} - {self.nome_local}"
+        else: 
+            return f"{self.distribuidor_id.razao_social} - {self.cidade}"
 
     def distribuidor(self):
         return self.distribuidor_id.razao_social
 
     class Meta():
-        ordering = ['distribuidor_id', 'cidade', 'slug']
+#        ordering = ['distribuidor', 'cidade', 'nome']
         verbose_name = 'Filial'
         verbose_name_plural = '2.1 - Cadastro de Filiais'
     
 
 class Responsavel(models.Model):
-    nome = models.CharField(max_length = 40)
-    cargo = models.CharField(max_length = 20, null=True, blank=True)
-    tipo_atuacao = models.CharField(max_length = 40)
-        ### Pode ser um "option field" no futuro... @todo
+    atuacao = (('Crop', 'Crop'),('Seeds','Seeds'), ('Ambos','Ambos'))
+    nome = models.CharField(max_length = 50)
+    cargo = models.CharField(max_length = 30, null=True, blank=True)
+    atuacao = models.CharField(max_length = 5, choices=atuacao)
     email = models.EmailField(null=True, blank=True)
     ddd1 = models.CharField(max_length = 2, null=True, blank=True)
     telefone1 = models.CharField(max_length = 9, null=True, blank=True)
@@ -81,77 +89,43 @@ class Responsavel(models.Model):
 
 
 class Responsavel_Distribuidor(models.Model):
-    distribuidor_id = models.ForeignKey(Distribuidor, on_delete=models.CASCADE)
-    responsavel_id = models.ForeignKey(Responsavel, on_delete=models.CASCADE)
+#    distribuidor = models.ForeignKey(Distribuidor, on_delete=models.CASCADE)
+    responsavel = models.ForeignKey(Responsavel, on_delete=models.CASCADE)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
     historico = HistoricalRecords()
 
     def __str__(self):
-        return self.distribuidor_id.razao_social
+        return self.distribuidor.razao_social
 
     def distribuidor(self):
-        return self.distribuidor_id.razao_social
+        return self.distribuidor.razao_social
 
     def responsavel(self):
-        return self.responsavel_id.nome
+        return self.responsavel.nome
 
     def atuacao(self):
-        return self.responsavel_id.tipo_atuacao
+        return self.responsavel.tipo_atuacao
 
     def telefone1(self):
-        if self.responsavel_id.ddd1 and self.responsavel_id.telefone1:
-            return f'({self.responsavel_id.ddd1}) {self.responsavel_id.telefone1[-9:-4]}-{self.responsavel_id.telefone1[-4:]}'
+        if self.responsavel.ddd1 and self.responsavel.telefone1:
+            return f'({self.responsavel.ddd1}) {self.responsavel.telefone1[-9:-4]}-{self.responsavel.telefone1[-4:]}'
 
     def telefone2(self):
-        if self.responsavel_id.ddd2 and self.responsavel_id.telefone2:
-            return f'({self.responsavel_id.ddd2}) {self.responsavel_id.telefone2[-9:-4]}-{self.responsavel_id.telefone2[-4:]}'
+        if self.responsavel.ddd2 and self.responsavel.telefone2:
+            return f'({self.responsavel.ddd2}) {self.responsavel.telefone2[-9:-4]}-{self.responsavel.telefone2[-4:]}'
 
     class Meta:
-        ordering = ['distribuidor_id', 'responsavel_id']
-        unique_together = ('distribuidor_id', 'responsavel_id')
+#        ordering = ['distribuidor', 'responsavel']
+#        unique_together = ('distribuidor', 'responsavel')
         verbose_name = 'Responsável pelo Distribuidor'
         verbose_name_plural = '9.2 - Responsável pelo Distribuidor'
 
-class Responsavel_Filial(models.Model):
-    filial_id = models.ForeignKey(Filial, on_delete=models.CASCADE)
-    responsavel_id = models.ForeignKey(Responsavel, on_delete=models.CASCADE)
-    criado_em = models.DateTimeField(auto_now_add=True)
-    atualizado_em = models.DateTimeField(auto_now=True)
-    status = models.BooleanField(default=True)
-    historico = HistoricalRecords()
-    def __str__(self):
-        return f"{self.filial_id.distribuidor_id.razao_social} - {self.responsavel_id.nome}"
-    def distribuidor(self):
-        return self.filial_id.distribuidor_id.razao_social
-    def local(self):
-        return f"{self.filial_id.cidade} / {self.filial_id.estado}"
-    
-    def unidade(self):
-        return f"{self.filial_id.slug} - {self.filial_id.codigo_local}"
-    def responsavel(self):
-        return self.responsavel_id.nome
-    def atuacao(self):
-        return self.responsavel_id.tipo_atuacao
-
-    def telefone1(self):
-        return f'({self.responsavel_id.ddd1}) {self.responsavel_id.telefone1[-9:-4]}-{self.responsavel_id.telefone1[-4:]}'
-
-    def telefone2(self):
-        if self.responsavel_id.ddd2 and self.responsavel_id.telefone2:
-            return f'({self.responsavel_id.ddd2}) {self.responsavel_id.telefone2[-9:-4]}-{self.responsavel_id.telefone2[-4:]}'
-
-    class Meta:
-        ordering = ['filial_id', 'responsavel_id']
-        unique_together = ('filial_id', 'responsavel_id')
-        verbose_name = 'Responsável pela Filial'
-        verbose_name_plural = '9.3 - Responsável pela Filial'
-
 
 class RTV(models.Model):
-    nome = models.CharField(max_length = 40)
+    nome = models.CharField(max_length = 50)
     code_spoca = models.CharField(max_length = 8, null=True, blank=True)
-    email = models.EmailField()
+    email = models.EmailField(null=True, blank=True)
     ddd1 = models.CharField(max_length=2, null=True, blank=True)
     telefone1 = models.CharField(max_length=9, null=True, blank=True)
     ramal1 = models.CharField(max_length=4, null=True, blank=True)
@@ -186,32 +160,34 @@ class RTV(models.Model):
         verbose_name = 'RTV'
         verbose_name_plural = '1.0 - Cadastro de RTVs'
 
+
+
 class RTV_Distribuidor(models.Model):
-    distribuidor_id = models.ForeignKey(Distribuidor, on_delete=models.CASCADE)
-    RTV_id = models.ForeignKey(RTV, on_delete=models.CASCADE)
+#    distribuidor = models.ForeignKey(Distribuidor, on_delete=models.CASCADE)
+    RTV = models.ForeignKey(RTV, on_delete=models.CASCADE)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
     historico = HistoricalRecords()
 
     def __str__(self):
-        return self.distribuidor_id.razao_social
+        return self.distribuidor.razao_social
 
     def distribuidor(self):
-        return self.distribuidor_id.razao_social
+        return self.distribuidor.razao_social
 
     def RTV(self):
-        return self.RTV_id.nome
+        return self.RTV.nome
 
     def contato1(self):
-        if self.RTV_id.ddd1 and self.RTV_id.telefone1:
-            return f'({self.RTV_id.ddd1}) {self.RTV_id.telefone1[-9:-4]}-{self.RTV_id.telefone1[-4:]}'
+        if self.RTV.ddd1 and self.RTV.telefone1:
+            return f'({self.RTV.ddd1}) {self.RTV.telefone1[-9:-4]}-{self.RTV.telefone1[-4:]}'
 
     def telefone2(self):
-        if self.RTV_id.ddd2 and self.RTV_id.telefone2:
-            return f'({self.RTV_id.ddd2}) {self.RTV_id.telefone2[-9:-4]}-{self.RTV_id.telefone2[-4:]}'
+        if self.RTV.ddd2 and self.RTV.telefone2:
+            return f'({self.RTV.ddd2}) {self.RTV.telefone2[-9:-4]}-{self.RTV.telefone2[-4:]}'
 
     class Meta:
-        ordering = ['distribuidor_id', 'RTV_id__nome']
-        unique_together = ('distribuidor_id', 'RTV_id')
+#        ordering = ['distribuidor', 'RTV__nome']
+#        unique_together = ('distribuidor', 'RTV')
         verbose_name = 'RTV do Distribuidor'
         verbose_name_plural = '9.1 - RTV do Distribuidor'

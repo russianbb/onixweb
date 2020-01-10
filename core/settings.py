@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'syncomercial',
     'simple_history',
     'nested_admin',
+    'syncomercial',
 ]
 
 MIDDLEWARE = [
@@ -76,24 +76,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'onixwebdb',
+        'USER': 'admin',
+        'PASSWORD': 'sol&OX16',
+        'HOST': 'localhost',
+        'PORT': '' 
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'onixwebdb',
-            'USER': 'admin',
-            'PASSWORD': 'sol&OX16',
-            'HOST': 'localhost',
-            'PORT': '' 
-        }
-    }
+}
 
 
 # Password validation
