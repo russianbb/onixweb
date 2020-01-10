@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'syncomercial',
+    'simple_history',
+    'nested_admin',
 ]
 
 MIDDLEWARE = [
