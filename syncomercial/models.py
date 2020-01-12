@@ -33,7 +33,7 @@ class Filial(models.Model):
     email = models.EmailField(null=True, blank=True)
     ddd = models.CharField(max_length = 2, null=True, blank=True)
     telefone = models.CharField(max_length = 9, null=True, blank=True)
-    endereco = models.CharField(max_length = 200)
+    endereco = models.CharField(max_length = 250)
     cidade = models.CharField(max_length = 50)
     estado = models.CharField(max_length = 2)
     codibge = models.CharField(max_length = 9, null=True, blank=True)
