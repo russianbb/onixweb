@@ -16,6 +16,12 @@ class Filial_Aninhado(NestedStackedInline):
     model = Filial
     extra = 0
 
+
+class Responsavel_Distribuidor_Aninhado(NestedStackedInline):
+    #Classe que controla exclusivamente a exibição do Responsável_Distribuidor na página do distribuidor
+    model = Responsavel_Distribuidor
+    extra = 0
+
 ##########################################################################################################################################
 
 class DistribuidorAdmin(SimpleHistoryAdmin, NestedModelAdmin):
@@ -31,7 +37,7 @@ class DistribuidorAdmin(SimpleHistoryAdmin, NestedModelAdmin):
     
     #Nested Part
     model = Distribuidor
-    inlines = [RTV_Distribuidor_Aninhado ,Filial_Aninhado]
+    inlines = [RTV_Distribuidor_Aninhado ,Responsavel_Distribuidor_Aninhado, Filial_Aninhado]
 
 
 class FilialAdmin(SimpleHistoryAdmin, NestedModelAdmin):
