@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'simple_history',
     'nested_admin',
     'syncomercial',
+    'synprodutos',
 ]
 
 MIDDLEWARE = [
