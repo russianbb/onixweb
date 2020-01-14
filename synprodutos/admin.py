@@ -2,7 +2,7 @@ from django.contrib import admin
 from nested_admin import NestedStackedInline, NestedModelAdmin, NestedTabularInline
 
 # Register your models here.
-from .models import Produto_Onix, Produto_Syngenta
+from .models import Produto_Onix, Produto_Syngenta, Produto_Distribuidor
 
 class Produto_SyngentaNested(NestedTabularInline):
     model = Produto_Syngenta
@@ -26,5 +26,8 @@ class Produto_OnixAdmin(NestedModelAdmin):
     model = Produto_Onix
     inlines = [Produto_SyngentaNested]
 
+
+
 admin.site.register(Produto_Onix, Produto_OnixAdmin)
 admin.site.register(Produto_Syngenta, Produto_SyngentaAdmin)
+admin.site.register(Produto_Distribuidor)

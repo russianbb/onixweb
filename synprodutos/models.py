@@ -1,5 +1,6 @@
 from django.db import models
 from simple_history.models import HistoricalRecords
+from syncomercial.models import Distribuidor
 
 # Create your models here.
 
@@ -49,5 +50,11 @@ class Produto_Syngenta(models.Model):
         return self.produto_onix.id
 
 
-class DePara_OnixDistribuidor(models.Model):
+class Produto_Distribuidor(models.Model):
     produto_onix = models.ForeignKey(Produto_Onix, on_delete=models.CASCADE)
+    distribuidor = models.ForeignKey(Distribuidor, on_delete=models.CASCADE)
+    codigo = models.CharField(max_length=10)
+    descricao = models.CharField(max_length=80)
+
+    def __str__(self):
+        return f'{self.distribuidor.razao_social}#{self.produto_onix.descricao}'
