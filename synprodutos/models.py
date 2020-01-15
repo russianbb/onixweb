@@ -47,7 +47,10 @@ class Produto_Syngenta(models.Model):
         return f'{self.codigo} - {self.descricao}'
 
     def onix_id(self):
-        return self.produto_onix.id
+        return f'{self.produto_onix.id}'
+
+    def onix_descricao(self):
+        return f'{self.produto_onix.descricao}'
 
 
 class Produto_Distribuidor(models.Model):
@@ -55,6 +58,19 @@ class Produto_Distribuidor(models.Model):
     distribuidor = models.ForeignKey(Distribuidor, on_delete=models.CASCADE)
     codigo = models.CharField(max_length=10)
     descricao = models.CharField(max_length=80)
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['distribuidor__razao_social', 'descricao']
+        verbose_name = 'Cadastro Distribuidor'
+        verbose_name_plural = '3.0 - Cadastro Distribuidor'
 
     def __str__(self):
-        return f'{self.distribuidor.razao_social}#{self.produto_onix.descricao}'
+        return f'{self.distribuidor.razao_social} - {self.produto_onix.descricao}'
+
+    def onix_id(self):
+        return f'{self.produto_onix.id}'
+
+    def onix_descricao(self):
+        return f'{self.produto_onix.descricao}'

@@ -12,22 +12,28 @@ class Produto_SyngentaNested(NestedTabularInline):
 ############################################################################################################
 
 
-class Produto_SyngentaAdmin(admin.ModelAdmin):
-    list_display = ('onix_id', 'codigo', 'descricao', 'familia', 'atualizado_em')
-    list_display_links = ('codigo', 'descricao', 'familia', 'atualizado_em')
-    search_fields = ('codigo', 'descricao', 'familia', 'atualizado_em')
-
-
 class Produto_OnixAdmin(NestedModelAdmin):
-    list_display = ('descricao', 'familia', 'volume', 'unidade', 'atualizado_em')
-    list_display_links = ('descricao', 'familia', 'volume', 'unidade', 'atualizado_em')
-    search_fields = ('descricao', 'produto', 'volume', 'unidade', 'atualizado_em')
+    list_display = ('id', 'descricao', 'familia', 'volume', 'unidade', 'atualizado_em')
+    list_display_links = ('id', 'descricao', 'familia', 'volume', 'unidade', 'atualizado_em')
+    search_fields = ('id', 'descricao', 'produto', 'volume', 'unidade', 'atualizado_em')
 
     model = Produto_Onix
     inlines = [Produto_SyngentaNested]
 
 
+class Produto_SyngentaAdmin(admin.ModelAdmin):
+    list_display = ('codigo', 'descricao', 'familia', 'onix_id', 'onix_descricao', 'atualizado_em')
+    list_display_links = ('codigo', 'descricao', 'familia', 'atualizado_em')
+    search_fields = ('codigo', 'descricao', 'familia', 'atualizado_em')
+
+
+class Produto_DistribuidorAdmin(admin.ModelAdmin):
+    list_display = ('distribuidor', 'codigo', 'descricao', 'onix_id', 'onix_descricao', 'atualizado_em')
+    list_display_links = ('codigo', 'descricao')
+    search_fields = ('codigo', 'descricao')
+
+
 
 admin.site.register(Produto_Onix, Produto_OnixAdmin)
 admin.site.register(Produto_Syngenta, Produto_SyngentaAdmin)
-admin.site.register(Produto_Distribuidor)
+admin.site.register(Produto_Distribuidor, Produto_DistribuidorAdmin)
