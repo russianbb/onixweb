@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from local_settings import LocalSettings
+from .local_settings import LocalSettings
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = { LocalSettings.Databases}
+DATABASES = LocalSettings.Databases
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
