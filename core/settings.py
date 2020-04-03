@@ -37,9 +37,11 @@ ALLOWED_HOSTS = LocalSettings.AllowedHosts
 INSTALLED_APPS = [
     #My apps
     'syncomercial',
-    'synprodutos',    
+    'synprodutos', 
+    'users',   
     
     #Third Party Apps
+    'adminlte3',
     'simple_history',
     'nested_admin',
     
@@ -127,5 +129,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_URL = '/_static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '_static/')
+
+#My Settings
+LOGIN_URL = 'users:login'

@@ -1,0 +1,17 @@
+{% extends 'syncomercial/base.html' %}
+
+
+{% block page_name %}ADICIONAR RESPONS&Aacute;VEL{% endblock %}
+
+{% block content %}
+    <!-- Form com Dados Basicos -->
+    <div class="card card-info" style="max-width: 1024px;">
+        <form action="{% url 'syncomercial:responsavel_adicionar' %}" method='post'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button name="submit">ADICIONAR</button>
+        </form>
+    </div>
+
+      <!-- /.card -->
+{% endblock content %}

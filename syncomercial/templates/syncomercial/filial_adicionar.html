@@ -1,0 +1,17 @@
+{% extends 'syncomercial/base.html' %}
+
+
+{% block page_name %}ADICIONAR FILIAL{% endblock %}
+
+{% block content %}
+    <!-- Form com Dados Basicos -->
+    <div class="card card-info" style="max-width: 1024px;">
+        <form action="{% url 'syncomercial:filial_adicionar' %}" method='post'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button name="submit">ADICIONAR</button>
+        </form>
+    </div>
+
+      <!-- /.card -->
+{% endblock content %}

@@ -1,0 +1,94 @@
+{% extends 'syncomercial/base.html' %}
+
+
+{% block page_name %}DETALHES DO RTV{% endblock %}
+
+{% block content %}
+    <!-- Form com Dados Basicos -->
+    <div class="card card-info" style="max-width: 1024px;">
+      <div class="card-header bg-secondary">
+        <div class="container-fluid ">
+          <div class="row">
+            <div>
+              <h3 class="card-title">Dados B&aacute;sicos</h3>
+            </div>
+            <div class="ml-auto">
+              <a href="{% url 'syncomercial:rtv_editar' rtv.id %}" type="button" class="btn btn-block btn-warning btn-xs ml-auto"><i class="fas fa-edit"></i> Editar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form class="form-horizontal">
+          <div class="card-body">
+            <div class="form-group row">
+              <label for="id" class="col-sm-2 col-form-label">ID</label>
+              <div class="col-sm-4">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="code_sap" placeholder="{{ rtv.id }}" readonly>
+              </div>
+              <div class="col-sm-6 mt-auto">
+                <small class="form-text text-muted">* identifica&ccedil;&atilde;o do RTV no sistema Onix Web</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="code_spoca" class="col-sm-2 col-form-label">Code SPOCA</label>
+              <div class="col-sm-4">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="code_sap" placeholder="{{ rtv.code_spoca }}" readonly>
+              </div>
+              <div class="col-sm-6 mt-auto">
+                <small class="form-text text-muted">* identifica&ccedil;&atilde;o do distribuidor na Syngenta</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="nome" class="col-sm-2 col-form-label">Nome</label>
+              <div class="col-sm-4">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="nome" placeholder="{{ rtv.nome }}" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email" class="col-sm-2 col-form-label">Email</label>
+              <div class="col-sm-4">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="email" placeholder="{{ rtv.email }}" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="telefone1" class="col-sm-2 col-form-label">Telefones</label>
+              <div class="col-sm-1">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="ddd1" placeholder="({{ rtv.ddd1 }})" readonly>
+              </div>
+              <div class="col-sm-3">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="telefone1" placeholder="{{ rtv.telefone1 }}" readonly>
+              </div>
+              <div class="col-sm-1">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="ramal1" placeholder="{% if rtv.ramal1 %} {{ rtv.ramal1 }} {% endif %}" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="telefone1" class="col-sm-2 col-form-label"></label>
+              <div class="col-sm-1">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="ddd2" placeholder="({{ rtv.ddd2 }})" readonly>
+              </div>
+              <div class="col-sm-3">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="telefone2" placeholder="{{ rtv.telefone2 }}" readonly>
+              </div>
+              <div class="col-sm-1">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="ramal1" placeholder="{% if rtv.ramal2 %} {{ rtv.ramal2 }} {% endif %}" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label for="anotacoes" class="col-sm-2 col-form-label">Anota&ccedil;&otilde;es</label>
+                <div class="col-sm-10">
+                  <textarea rows="5" class="form-control-plaintext border-bottom border-top-0 border-gray" id="anotaces" placeholder="{{ rtv.anotacao }}" readonly></textarea>
+                </div>
+              </div>
+          </div>
+          
+          <!-- /.card-body -->
+        </form>
+      </div>
+      <!-- /.card -->
+
+        
+
+{% endblock content %}
