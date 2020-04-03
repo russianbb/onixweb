@@ -69,7 +69,7 @@ def filial_adicionar(request, distribuidor_id):
         if form.is_valid():
             #Formulario validado
             form.save()
-        return redirect('syncomercial:distribuidores')
+        return redirect('syncomercial:distribuidor_detalhe', distribuidor_id = distribuidor_id)
         
     
     context = {'form': form}
