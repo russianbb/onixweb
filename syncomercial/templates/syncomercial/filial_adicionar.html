@@ -4,9 +4,13 @@
 {% block page_name %}ADICIONAR FILIAL{% endblock %}
 
 {% block content %}
+    <p>Distribuidor id: {{ distribuidor.id }}</p>
+    <p>Distribuidor Razao: {{ distribuidor.razao_social }}</p>
+
+
     <!-- Form com Dados Basicos -->
     <div class="card card-info" style="max-width: 1024px;">
-        <form action="{% url 'syncomercial:filial_adicionar' %}" method='post'>
+        <form action="{% url 'syncomercial:filial_adicionar' 1 %}" method='post'>
             {% csrf_token %}
             {{ form.as_p }}
             <button name="submit">ADICIONAR</button>

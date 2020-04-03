@@ -57,11 +57,12 @@ def filial_editar(request, filial_id):
     return render(request, 'syncomercial/filial_editar.html', context)
 
 @login_required
-def filial_adicionar(request):
-    """Adiciona nova filial a um distribuidor em especifico"""
+def filial_adicionar(request, distribuidor_id):
+    """Adiciona nova filial a um distribuidor em especifico"""    
     if request.method != 'POST':
         #Formulario em Branco
-        form = FilialForm()
+        form = FilialForm(initial={'distribuidor': distribuidor_id })
+        
     else:
         #Formulario preenchido
         form = FilialForm(data=request.POST)
