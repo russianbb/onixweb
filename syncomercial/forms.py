@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Filial, RTV, Responsavel
+from .models import Filial, RTV, Responsavel, RTV_Distribuidor, Responsavel_Distribuidor
 
 class FilialForm(forms.ModelForm):
     class Meta:
@@ -55,4 +55,21 @@ class ResponsavelForm(forms.ModelForm):
             'ramal2',
             'anotacao',
             'status',
+        ]
+        
+        
+class RTV_DistribuidorForm(forms.ModelForm):
+    class Meta:
+        model = RTV_Distribuidor
+        fields = [
+            'distribuidor',
+            'RTV',
+        ]
+        
+class Responsavel_DistribuidorForm(forms.ModelForm):
+    class Meta:
+        model = Responsavel_Distribuidor
+        fields = [
+            'distribuidor',
+            'responsavel',
         ]

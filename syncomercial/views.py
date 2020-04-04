@@ -8,6 +8,8 @@ from .forms import *
 def index(request):
     return render(request, 'syncomercial/index.html')
 
+
+#Views relacionadas a DISTRIBUIDORES
 @login_required
 def distribuidores(request):
     """Lista todos os distribuidores"""
@@ -22,10 +24,16 @@ def distribuidor_detalhe(request, distribuidor_id):
     """Lista os detalhes de um distribuidor especifico"""
     distribuidor = Distribuidor.objects.get(id=distribuidor_id)
     filiais = distribuidor.filial_set.order_by('codigo')
+    rtvs = RTV_Distribuidor.objects.filter(distribuidor=distribuidor_id)
+    responsaveis = Responsavel_Distribuidor.objects.filter(distribuidor=distribuidor_id)
+    print(len(rtvs))
     context = {
         'distribuidor': distribuidor,
         'filiais': filiais,
+        'rtvs': rtvs,
+        'responsaveis': responsaveis,
     }
+    print(context)
     return render(request, 'syncomercial/distribuidor_detalhe.html', context)
 
 @login_required
@@ -76,6 +84,7 @@ def filial_adicionar(request, distribuidor_id):
     return render(request, 'syncomercial/filial_adicionar.html', context)
 
 
+#Views relacionadas a RTVS
 @login_required
 def rtvs(request):
     """Lista todos os distribuidores"""
@@ -130,6 +139,36 @@ def rtv_adicionar(request):
     return render(request, 'syncomercial/rtv_adicionar.html', context)
 
 @login_required
+def rtv_atribuir(request, distribuidor_id):
+    """Cria a relacao entre RTV e Distribuidor"""
+    print(f"Distribuidor ID: {distribuidor_id}")
+    
+    if request.method != 'POST':
+        #Formulario inicial, com os dados atuais.
+        print('metodo POST')
+        form = RTV_DistribuidorForm(initial={'distribuidor': distribuidor_id })
+    else:
+        #Formulario Preenchido
+        print('metodo POST')
+        form = RTV_DistribuidorForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('syncomercial:distribuidor_detalhe', distribuidor_id=distribuidor_id)
+    
+    context = {'form':form}
+    return render(request, 'syncomercial/rtv_atribuir.html', context)
+
+
+@login_required
+def rtv_desatribuir(request, rtv_id, distribuidor_id):
+    """Desatribuir/Deletar uma relacao entre RTV e Distribuidor"""
+    relacao = RTV_Distribuidor.objects.get(RTV=rtv_id, distribuidor=distribuidor_id)
+    relacao.delete()
+    return redirect('syncomercial:distribuidor_detalhe', distribuidor_id=distribuidor_id)
+
+
+#Views relacionadas a RESPONSAVEIS
+@login_required
 def responsaveis(request):
     """Lista todos os responsaveis"""
     responsaveis = Responsavel.objects.all().order_by('nome')
@@ -166,6 +205,7 @@ def responsavel_editar(request, responsavel_id):
 
 @login_required
 def responsavel_adicionar(request):
+    
     """Adiciona novo Responsavel"""
     if request.method != 'POST':
         #Formulario em Branco
@@ -181,3 +221,30 @@ def responsavel_adicionar(request):
     
     context = {'form': form}
     return render(request, 'syncomercial/responsavel_adicionar.html', context)
+
+@login_required
+def responsavel_atribuir(request, distribuidor_id):
+    """Cria a relacao entre Responsavel e Distribuidor"""
+    print(f"Distribuidor ID: {distribuidor_id}")
+    
+    if request.method != 'POST':
+        #Formulario inicial, com os dados atuais.
+        print('metodo POST')
+        form = Responsavel_DistribuidorForm(initial={'distribuidor': distribuidor_id })
+    else:
+        #Formulario Preenchido
+        print('metodo POST')
+        form = Responsavel_DistribuidorForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('syncomercial:distribuidor_detalhe', distribuidor_id=distribuidor_id)
+    
+    context = {'form':form}
+    return render(request, 'syncomercial/responsavel_atribuir.html', context)
+
+@login_required
+def responsavel_desatribuir(request, responsavel_id, distribuidor_id):
+    """Desatribuir/Deletar uma relacao entre Responsavel e Distribuidor"""
+    relacao = Responsavel_Distribuidor.objects.get(responsavel=responsavel_id, distribuidor=distribuidor_id)
+    relacao.delete()
+    return redirect('syncomercial:distribuidor_detalhe', distribuidor_id=distribuidor_id)
