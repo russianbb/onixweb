@@ -22,7 +22,7 @@
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
           <table class="table table-hover" data-link="row">
-            <thead>
+            <thead class="bg-secondary">
               <tr>
                 <th></th>
                 <th>NOME</th>
@@ -37,10 +37,10 @@
                 {% for responsavel in responsaveis %}
                 <td><a class="text-warning" href="{% url 'syncomercial:responsavel_editar' responsavel.id %}"><i class="fas fa-edit"></i></a></td>
                 <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">{{ responsavel.nome }}</a></td>
-                <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">{{ responsavel.atuacao }}</a></td>
-                <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">{{ responsavel.email }}</a></td>
-                <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">({{ responsavel.ddd1 }}) - {{ responsavel.telefone1 }}</a></td>
-                <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">({{ responsavel.ddd2 }}) - {{ responsavel.telefone2 }}</a></td>
+                <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">{% if responsavel.atuacao %}{{ responsavel.atuacao }}{% endif %}</a></td>
+                <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">{% if responsavel.email %}{{ responsavel.email }}{% endif %}</a></td>
+                <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">{% if responsavel.telefone1 %}({{ responsavel.ddd1 }}) {{responsavel.telefone1|slice:"-9:-4"}}-{{responsavel.telefone1|slice:"-4:"}}{% endif %}</a></td>
+                <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">{% if responsavel.telefone2 %}({{ responsavel.ddd2 }}) {{responsavel.telefone2|slice:"-9:-4"}}-{{responsavel.telefone2|slice:"-4:"}}{% endif %}</a></td>
               </tr>
                 {% empty %}
                 {% endfor %}

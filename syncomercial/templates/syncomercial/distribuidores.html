@@ -24,8 +24,8 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
-              <table class="table table-hover" data-link="row">
-                <thead>
+              <table class="table table-hover table-striped" data-link="row">
+                <thead class="bg-secondary">
                   <tr>
                     <th>CODE SAP</th>
                     <th>RAZ&Atilde;O SOCIAL</th>
@@ -36,7 +36,7 @@
                 <tbody>
                   <tr>
                     {% for distribuidor in distribuidores %}
-                    <td><a class="text-primary" href="{% url 'syncomercial:distribuidor_detalhe' distribuidor.id %}">{{ distribuidor.id }}</a></td>
+                    <td><a class="text-primary" href="{% url 'syncomercial:distribuidor_detalhe' distribuidor.id %}">{{ distribuidor.code_sap }}</a></td>
                     <td><a class="text-primary" href="{% url 'syncomercial:distribuidor_detalhe' distribuidor.id %}">{{ distribuidor.razao_social }}</a></td>
                     <td><a class="text-primary" href="{% url 'syncomercial:distribuidor_detalhe' distribuidor.id %}">{{ distribuidor.nome_fantasia }}</a></td>
                     <td><a class="text-primary" href="{% url 'syncomercial:distribuidor_detalhe' distribuidor.id %}">{{ distribuidor.atualizado_em|date:'H:i - d/M/Y' }}</a></td>
