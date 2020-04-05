@@ -37,7 +37,6 @@ ALLOWED_HOSTS = LocalSettings.AllowedHosts
 INSTALLED_APPS = [
     #My apps
     'syncomercial',
-    'synprodutos', 
     'users',   
     
     #Third Party Apps

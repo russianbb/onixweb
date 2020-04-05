@@ -61,7 +61,7 @@
                 <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="ddd1" placeholder="({{ responsavel.ddd1 }})" readonly>
               </div>
               <div class="col-sm-3">
-                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="telefone1" placeholder="{{responsavel.telefone1|slice:"-9:-4"}}-{{responsavel.telefone1|slice:"-4:"}}" readonly>
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="telefone1" placeholder="{{responsavel.telefone1|slice:'-9:-4'}}-{{responsavel.telefone1|slice:'-4:'}}" readonly>
               </div>
               <div class="col-sm-1">
                 <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="ramal1" placeholder="{% if responsavel.ramal1 %} {{ responsavel.ramal1 }} {% endif %}" readonly>
@@ -73,7 +73,7 @@
                 <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="ddd2" placeholder="({{ responsavel.ddd2 }})" readonly>
               </div>
               <div class="col-sm-3">
-                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="telefone2" placeholder="{{responsavel.telefone2|slice:"-9:-4"}}-{{responsavel.telefone2|slice:"-4:"}}" readonly>
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="telefone2" placeholder="{{responsavel.telefone2|slice:'-9:-4'}}-{{responsavel.telefone2|slice:'-4:''}}" readonly>
               </div>
               <div class="col-sm-1">
                 <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="ramal1" placeholder="{% if responsavel.ramal2 %} {{ responsavel.ramal2 }} {% endif %}" readonly>
@@ -82,7 +82,7 @@
             <div class="form-group row">
                 <label for="anotacoes" class="col-sm-2 col-form-label">Anota&ccedil;&otilde;es</label>
                 <div class="col-sm-10">
-                  <textarea rows="5" class="form-control-plaintext border-bottom border-top-0 border-gray" id="anotaces" placeholder="{{ responsavel.anotacao }}" readonly></textarea>
+                  <textarea rows="5" class="form-control-plaintext border-bottom border-top-0 border-gray" id="anotaces" placeholder="{% if responsavel.anotacao %}{{ responsavel.anotacao }}" readonly></textarea>
                 </div>
               </div>
           </div>

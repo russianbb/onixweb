@@ -26,7 +26,6 @@
               <tr>
                 <th></th>
                 <th>NOME</th>
-                <th>ATUA&Ccedil;&Atilde;O</th>
                 <th>EMAIL</th>
                 <th>TELEFONES</th>
                 <th></th>
@@ -37,7 +36,6 @@
                 {% for responsavel in responsaveis %}
                 <td><a class="text-warning" href="{% url 'syncomercial:responsavel_editar' responsavel.id %}"><i class="fas fa-edit"></i></a></td>
                 <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">{{ responsavel.nome }}</a></td>
-                <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">{% if responsavel.atuacao %}{{ responsavel.atuacao }}{% endif %}</a></td>
                 <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">{% if responsavel.email %}{{ responsavel.email }}{% endif %}</a></td>
                 <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">{% if responsavel.telefone1 %}({{ responsavel.ddd1 }}) {{responsavel.telefone1|slice:"-9:-4"}}-{{responsavel.telefone1|slice:"-4:"}}{% endif %}</a></td>
                 <td><a class="text-primary" href="{% url 'syncomercial:responsavel_detalhe' responsavel.id %}">{% if responsavel.telefone2 %}({{ responsavel.ddd2 }}) {{responsavel.telefone2|slice:"-9:-4"}}-{{responsavel.telefone2|slice:"-4:"}}{% endif %}</a></td>
