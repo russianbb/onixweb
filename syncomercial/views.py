@@ -23,7 +23,7 @@ def distribuidores(request):
 def distribuidor_detalhe(request, distribuidor_id):
     """Lista os detalhes de um distribuidor especifico"""
     distribuidor = Distribuidor.objects.get(id=distribuidor_id)
-    filiais = distribuidor.filial_set.order_by('codigo')
+    filiais = distribuidor.filial_set.order_by('cnpj')
     rtvs = RTV_Distribuidor.objects.filter(distribuidor=distribuidor_id)
     responsaveis = Responsavel_Distribuidor.objects.filter(distribuidor=distribuidor_id)
     print(len(rtvs))
