@@ -8,21 +8,22 @@ from syncomercial.models import Distribuidor
 
 class Produto_Onix(models.Model):
     unidade_choices = (
-        ('Kg', 'kilos'),
-        ('g', 'gramas'),
-        ('L', 'litros'),
-        ('ml', 'mililitros'),
-        ('cx', 'caixa')
+        ('KG', 'Kilos'),
+        ('G', 'Gramas'),
+        ('L', 'Litros'),
+        ('ML', 'Mililitros'),
+        ('CX', 'Caixa')
     )
-    familia = models.CharField(max_length=70)
-    volume = models.DecimalField(max_digits=7, decimal_places=3)
+    descricao = models.CharField(max_length=50)
+    prefixo = models.CharField(max_length=40)
+    embalagem = models.CharField(max_length=4)
     unidade = models.CharField(max_length=2, choices=unidade_choices)
-    descricao = models.CharField(max_length=80)
+    volume = models.DecimalField(max_digits=7, decimal_places=3)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['volume', 'familia']
+        ordering = ['volume', 'prefixo']
         verbose_name = 'Cadastro Onix'
         verbose_name_plural = '1.0 - Cadastro Onix'
     
@@ -32,8 +33,8 @@ class Produto_Onix(models.Model):
 
 class Produto_Syngenta(models.Model):
     produto_onix = models.ForeignKey(Produto_Onix, on_delete=models.CASCADE)
-    codigo = models.PositiveIntegerField()
-    familia = models.CharField(max_length=30)
+    agicode = models.CharField(max_length=8)
+    familia = models.CharField(max_length=40)
     descricao = models.CharField(max_length=50)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
