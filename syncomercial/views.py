@@ -33,7 +33,6 @@ def distribuidor_detalhe(request, distribuidor_id):
         'rtvs': rtvs,
         'responsaveis': responsaveis,
     }
-    print(context)
     return render(request, 'syncomercial/distribuidor_detalhe.html', context)
 
 @login_required
