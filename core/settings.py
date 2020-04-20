@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from .local_settings import LocalSettings
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,28 +21,36 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
+# Create a instance of the Local Settings
+LocalSettings = LocalSettings()
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_9&o9o+p4yim8a@*v#w$e(gzv$qh=&sq2rh%2sttcj8(d(w_&n'
+SECRET_KEY = LocalSettings.SecretKey
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = LocalSettings.Debug
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.34.63.130', 'onixse.com', 'web.onixse.com']
-
+ALLOWED_HOSTS = LocalSettings.AllowedHosts
 
 # Application definition
 
 INSTALLED_APPS = [
+    #My apps
+    'syncomercial',
+    'users',   
+    
+    #Third Party Apps
+    'adminlte3',
+    'simple_history',
+    'nested_admin',
+    
+    #Django Native Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'simple_history',
-    'nested_admin',
-    'syncomercial',
-    'synprodutos',
 ]
 
 MIDDLEWARE = [
@@ -78,17 +88,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'onixwebdb',
-        'USER': 'admin',
-        'PASSWORD': 'sol&OX16',
-        'HOST': 'localhost',
-        'PORT': '' 
-    }
-}
-
+DATABASES = LocalSettings.Databases
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -128,3 +128,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATICFILES_DIR = os.path.join(BASE_DIR, 'static/')
+
+#My Settings
+LOGIN_URL = 'users:login'

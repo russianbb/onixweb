@@ -1,0 +1,17 @@
+{% extends 'syncomercial/base.html' %}
+
+
+{% block page_name %}EDITAR FILIAL{% endblock %}
+
+{% block content %}
+    <!-- Form com Dados Basicos -->
+    <div class="card card-info" style="max-width: 1024px;">
+        <form action="{% url 'syncomercial:filial_editar' filial.id %}" method='post'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button name="submit">Save Changes</button>
+        </form>
+    </div>
+
+      <!-- /.card -->
+{% endblock content %}

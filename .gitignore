@@ -1,6 +1,10 @@
-*.sqlite3*.pyc
+*.sqlite3*
+.pyc
+.vscode
 *~
 __pycache__
 .venv
 /static
+/_static
 .DS_Store
+/core/local_settings.py

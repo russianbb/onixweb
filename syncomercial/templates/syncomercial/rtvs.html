@@ -1,0 +1,55 @@
+{% extends 'syncomercial/base.html' %}
+
+
+{% block page_name %}TODOS OS RTVs{% endblock %}
+
+{% block content %}
+<div class="row" style="max-width: 1024px;">
+    <div class="col-12">
+      <div class="card card-info" style="max-width: 1024px;">
+        <div class="card-header bg-secondary">
+          <div class="container-fluid ">
+            <div class="row">
+              <div>
+                <h3 class="card-title">RTVs</h3>
+              </div>
+              <div class="ml-auto">
+                <a href="{% url 'syncomercial:rtv_adicionar' %}" type="button" class="btn btn-block btn-success btn-xs ml-auto"><i class="fas fa-plus-square"></i> Adicionar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover" data-link="row">
+            <thead class="bg-secondary">
+              <tr>
+                <th></th>
+                <th>NOME</th>
+                <th>SPOCA</th>
+                <th>EMAIL</th>
+                <th>TELEFONES</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {% for rtv in rtvs %}
+                <td><a class="text-warning" href="{% url 'syncomercial:rtv_editar' rtv.id %}"><i class="fas fa-edit"></i></a></td>
+                <td><a class="text-primary" href="{% url 'syncomercial:rtv_detalhe' rtv.id %}">{% if rtv.nome %}{{ rtv.nome }}{% endif %}</a></td>
+                <td><a class="text-primary" href="{% url 'syncomercial:rtv_detalhe' rtv.id %}">{% if rtv.code_spoca %}{{ rtv.code_spoca }}{% endif %}</a></td>
+                <td><a class="text-primary" href="{% url 'syncomercial:rtv_detalhe' rtv.id %}">{% if rtv.email %}{{ rtv.email }}{% endif %}</a></td>
+                <td><a class="text-primary" href="{% url 'syncomercial:rtv_detalhe' rtv.id %}">{% if rtv.telefone1 %}({{ rtv.ddd1 }}) {{rtv.telefone1|slice:"-9:-4"}}-{{rtv.telefone1|slice:"-4:"}}{% endif %}</a></td>
+                <td><a class="text-primary" href="{% url 'syncomercial:rtv_detalhe' rtv.id %}">{% if rtv.telefone2 %}({{ rtv.ddd2 }}) {{rtv.telefone2|slice:"-9:-4"}}-{{rtv.telefone2|slice:"-4:"}}{% endif %}
+              </tr>
+                {% empty %}
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+{% endblock %}

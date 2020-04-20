@@ -1,6 +1,7 @@
 asgiref==3.2.3
 astroid==2.3.3
 Django==3.0.2
+django-adminlte3==0.1.2
 django-nested-admin==3.2.4
 django-simple-history==2.8.0
 isort==4.3.21

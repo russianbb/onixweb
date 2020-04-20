@@ -1,0 +1,136 @@
+{% extends 'syncomercial/base.html' %}
+
+
+{% block page_name %}DETALHES DA FILIAL{% endblock %}
+
+{% block content %}
+    <!-- Form com Dados Basicos -->
+    <div class="card card-info" style="max-width: 1024px;">
+      <div class="card-header bg-secondary">
+        <div class="container-fluid ">
+          <div class="row">
+            <div>
+              <h3 class="card-title">Dados B&aacutesicos</h3>
+            </div>
+            <div class="ml-auto">
+              <a href="{% url 'syncomercial:filial_editar' filial.id %}" type="button" class="btn btn-block btn-warning btn-xs ml-auto"><i class="fas fa-edit"></i> Editar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+        <!-- /.card-header -->
+        <!-- form dados basicos -->
+        <form class="form-horizontal">
+          <div class="card-body">
+            <div class="form-group row">
+                <label for="distribuidor" class="col-sm-2 col-form-label">Distribuidor</label>
+                <div class="col-sm-10">
+                  <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="id" placeholder="{{ filial.distribuidor }}" readonly>
+                </div>
+              </div>
+            <div class="form-group row">
+              <label for="id" class="col-sm-2 col-form-label">ID Onix</label>
+              <div class="col-sm-4">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="id" placeholder="{{ filial.id }}" readonly>
+              </div>
+              <div class="col-sm-6 mt-auto">
+                <small class="form-text text-muted">* identifica&ccedil;&atilde;o da filial no sistema Onix Web</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="codigo" class="col-sm-2 col-form-label">C&oacute;digo </label>
+              <div class="col-sm-4">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="codigo" placeholder="{{ filial.codigo }}" readonly>
+              </div>
+              <div class="col-sm-6 mt-auto">
+                <small class="form-text text-muted">* identifica&ccedil;&atilde;o da filial no relat&oacute;rio do distribuidor</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="nome" class="col-sm-2 col-form-label">Nome</label>
+              <div class="col-sm-4">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="nome" placeholder="{{ filial.codigo }}" readonly>
+              </div>
+              <div class="col-sm-6 mt-auto">
+                <small class="form-text text-muted">* identifica&ccedil;&atilde;o da filial no relat&oacute;rio do distribuidor</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="cnpj" class="col-sm-2 col-form-label">CNPJ</label>
+              <div class="col-sm-4">
+                <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="cnpj" placeholder="{{ filial.cnpj }}" readonly>
+              </div>
+              <div class="col-sm-6 mt-auto">
+                <small class="form-text text-muted">* somente n&utilde;meros. Sem "-", "." ou "/"</small>
+              </div>
+            </div>
+          </div>
+        </form>
+    </div>
+
+        
+
+    
+        <!-- /.card -->
+    <div class="card card-info" style="max-width: 1024px;">
+      <div class="card-header bg-secondary">
+        <h3 class="card-title">Contato e Localiza&ccedil;&atilde;o</h3>
+      </div>
+      <form class="form-horizontal">
+        <div class="card-body">
+
+          <div class="form-group row">
+            <label for="responsavel" class="col-sm-2 col-form-label">Respons&aacute;vel</label>
+            <div class="col-sm-10">
+              <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="id" placeholder="{{ filial.responsavel }}" readonly>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="telefone" class="col-sm-2 col-form-label">Telefone</label>
+            <div class="col-sm-1">
+              <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="ddd" placeholder="{{ filial.ddd }}" readonly>
+            </div>
+            <div class="col-sm-9">
+              <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="telefone" placeholder="{{ filial.telefone }}" readonly>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="endereco" class="col-sm-2 col-form-label">Endere&ccedil;o</label>
+            <div class="col-sm-10">
+              <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="endereco" placeholder="{{ filial.endereco }}" readonly>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="cidade" class="col-sm-2 col-form-label">Cidade</label>
+            <div class="col-sm-4">
+              <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="cidade" placeholder="{{ filial.cidade }}" readonly>
+            </div>
+            <label for="estado" class="col-sm-2 col-form-label">Estado</label>
+            <div class="col-sm-4">
+              <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="estado" placeholder="{{ filial.estado }}" readonly>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="codibge" class="col-sm-2 col-form-label">COD IBGE</label>
+            <div class="col-sm-2">
+              <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="codibge" placeholder="{{ filial.codibge }}" readonly>
+            </div>
+              <label for="latitude" class="col-sm-2 col-form-label">Latitude</label>
+            <div class="col-sm-2">
+              <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="latitude" placeholder="{{ filial.latitude }}" readonly>
+            </div>
+              <label for="longitude" class="col-sm-2 col-form-label">Longitude</label>
+            <div class="col-sm-2">
+              <input class="form-control-plaintext border-bottom border-top-0 border-gray" id="longitude" placeholder="{{ filial.longitude }}" readonly>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+      <!-- /.card -->
+{% endblock content %}
