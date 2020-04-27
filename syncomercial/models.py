@@ -4,7 +4,7 @@ from simple_history.models import HistoricalRecords
 # Create your models here
 
 class Distribuidor(models.Model):
-    code_sap = models.CharField(max_length = 8)
+    code_sap = models.CharField(max_length = 8, unique=True)
     razao_social = models.CharField(max_length = 100)
     nome_fantasia = models.CharField(max_length = 50)
     criado_em = models.DateTimeField(auto_now_add=True)
@@ -55,6 +55,7 @@ class Filial(models.Model):
         ordering = ['distribuidor__razao_social', 'cidade', 'nome']
         verbose_name = 'Filial'
         verbose_name_plural = '1.1 - Cadastro de Filiais'
+        unique_together = [['cnpj', 'codigo', 'nome', 'distribuidor_id']]
 
 
 class Responsavel(models.Model):

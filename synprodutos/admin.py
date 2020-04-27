@@ -15,7 +15,7 @@ class Produto_SyngentaNested(NestedTabularInline):
 class Produto_OnixAdmin(NestedModelAdmin):
     list_display = ('id', 'descricao', 'atualizado_em')
     list_display_links = ('id', 'descricao', 'atualizado_em')
-    search_fields = ('id', 'descricao', 'produto', 'volume', 'unidade', 'atualizado_em')
+    search_fields = ('id', 'descricao', 'prefixo', 'volume', 'unidade', 'atualizado_em')
 
     model = Produto_Onix
     inlines = [Produto_SyngentaNested]

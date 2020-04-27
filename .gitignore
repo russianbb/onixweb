@@ -8,3 +8,5 @@ __pycache__
 /_static
 .DS_Store
 /core/local_settings.py
+populate/
+development.sqlite3
