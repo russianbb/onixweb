@@ -58,7 +58,7 @@ class Produto_Syngenta(models.Model):
 class Produto_Distribuidor(models.Model):
     produto_onix = models.ForeignKey(Produto_Onix, on_delete=models.CASCADE)
     distribuidor = models.ForeignKey(Distribuidor, on_delete=models.CASCADE)
-    codigo = models.CharField(max_length=10, null=True, blank=True)
+    codigo = models.CharField(max_length=20, null=True, blank=True)
     descricao = models.CharField(max_length=80, null=True, blank=True)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
